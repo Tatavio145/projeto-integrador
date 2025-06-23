@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sistema de Restaurante</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="auth-container" class="auth-container">
+    <h2>Cadastro</h2>
+    <input type="text" id="new-name" placeholder="Nome">
+    <input type="text" id="new-username" placeholder="Usuário">
+    <input type="password" id="new-password" placeholder="Senha">
+    <select id="new-role">
+      <option value="user">Usuário</option>
+      <option value="admin">Administrador</option>
+    </select>
+    <button onclick="registerUser()">Cadastrar</button>
+    <hr>
+    <h2>Login</h2>
+    <input type="text" id="username" placeholder="Usuário" />
+    <input type="password" id="password" placeholder="Senha" />
+    <button onclick="login()">Entrar</button>
+    <p id="login-error" class="error-message"></p>
+  </div>
+
+  <div id="dashboard" class="hidden">
+    <header>
+      <h1>Dashboard do Restaurante</h1>
+      <button onclick="logout()">Sair</button>
+    </header>
+    <div id="summary">
+      <h2>Resumo</h2>
+      <p>Total de Usuários: <span id="user-count"></span></p>
+      <p>Total de Pratos: <span id="dish-count"></span></p>
+      <p>Total de Pedidos: <span id="order-count"></span></p>
+    </div>
+    <section class="crud-section">
+      <h2>Usuários</h2>
+      <div class="crud-controls">
+        <input type="text" placeholder="Filtrar por nome" oninput="filterUsers(this.value)" />
+        <button onclick="sortUsers('name')">Ordenar por nome</button>
+        <button onclick="sortUsers('role')">Ordenar por perfil</button>
+      </div>
+      <table id="user-table"></table>
+    </section>
+    <section class="crud-section">
+      <h2>Pratos</h2>
+      <button onclick="openForm('dish')">Adicionar Prato</button>
+      <table id="dish-table"></table>
+    </section>
+    <section class="crud-section">
+      <h2>Pedidos</h2>
+      <button onclick="openForm('order')">Novo Pedido</button>
+      <table id="order-table"></table>
+    </section>
+    <div id="form-modal" class="modal hidden">
+      <div class="modal-content">
+        <span class="close" onclick="closeForm()">&times;</span>
+        <form id="entity-form"></form>
+      </div>
+    </div>
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
